@@ -1,7 +1,15 @@
 import psutil
 import operator
+import datetime
+
+print datetime.datetime.now()
+
 conn=psutil.net_connections()
 # get connection info from psutil
+print "total connections"
+print len(conn)
+print ""
+
 
 dictConn={}
 dictStatus={}
@@ -27,6 +35,7 @@ for i in conn:
 sorted_conn = sorted(dictConn.items(), key=operator.itemgetter(1), reverse=True)
 sorted_status = sorted(dictStatus.items(), key=operator.itemgetter(1), reverse=True)
 
+print "top 10, remote address"
 icount=1
 for i in sorted_conn:
     print "%2d %-15s %s" %(icount,i[0],i[1])
@@ -37,6 +46,7 @@ for i in sorted_conn:
 
 print ""
 
+print "top 10,connection status"
 icount=1
 for i in sorted_status:
     print "%2d %-15s %s" %(icount,i[0],i[1])
