@@ -2,12 +2,13 @@ import psutil
 import operator
 import datetime
 
-print datetime.datetime.now()
+print ""
+print "conncount ver 0.1"
+print "execute time:",datetime.datetime.now()
 
 conn=psutil.net_connections()
 # get connection info from psutil
-print "total connections"
-print len(conn)
+print "total connections:", len(conn)
 print ""
 
 
@@ -15,14 +16,17 @@ dictConn={}
 dictStatus={}
 dictLocalPort={}
 
+remoteAddressSum=0
 for i in conn:
     if i.raddr:
         remoteAddress=i.raddr[0]
         connStatus=i.status
         localPort=i.laddr[1]
+        remoteAddressSum += 1
         if dictConn.has_key(remoteAddress):
             dictConn[remoteAddress]=dictConn[remoteAddress]+1
             # count  +1 if  dict already had this ip
+
         else:
             dictConn[remoteAddress]=1
             # add ip as new key, also count it from 1
@@ -46,32 +50,39 @@ sorted_localPort= sorted(dictLocalPort.items(), key=operator.itemgetter(1), reve
 
 print "top 10, remote address"
 icount=1
+rcount=0.0
 for i in sorted_conn:
     print "%2d %-15s %s" %(icount,i[0],i[1])
     icount+=1
+    rcount+=i[1]
     if (icount>10):
         break
         # list top 10 remote address, sorted by connections.
 
+print "top 10 %3.2f%%, other %3.2f%%" %(rcount/remoteAddressSum*100, (remoteAddressSum-rcount)/remoteAddressSum)
 print ""
 
 print "top 10,connection status"
 icount=1
+rcount=0.0
 for i in sorted_status:
     print "%2d %-15s %s" %(icount,i[0],i[1])
     icount+=1
+    rcount += i[1]
     if (icount>10):
         break
         # list top 10 status, sorted by status
-
+print "top 10 %3.2f%%, other %3.2f%%" %(rcount/remoteAddressSum*100, (remoteAddressSum-rcount)/remoteAddressSum*100)
 print ""
 
 print "top 10,local port"
 icount=1
+rcount=0.0
 for i in sorted_localPort:
     print "%2d %-15s %s" %(icount,i[0],i[1])
     icount+=1
+    rcount += i[1]
     if (icount>10):
         break
         # list top 10 status, sorted by status
-
+print "top 10 %3.2f%%, other %3.2f%%" %(rcount/remoteAddressSum*100, (remoteAddressSum-rcount)/remoteAddressSum*100)
