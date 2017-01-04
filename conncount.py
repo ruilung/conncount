@@ -59,7 +59,7 @@ for i in sorted_conn:
         break
         # list top 10 remote address, sorted by connections.
 
-print "top 10 %3.2f%%, other %3.2f%%" %(rcount/remoteAddressSum*100, (remoteAddressSum-rcount)/remoteAddressSum)
+print "top 10 %3.2f%%, other %3.2f%%" %(rcount/remoteAddressSum*100, (remoteAddressSum-rcount)/remoteAddressSum*100)
 print ""
 
 print "top 10,connection status"
