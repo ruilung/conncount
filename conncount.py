@@ -37,7 +37,7 @@ for i in conn:
             dictStatus[connStatus]=1
             # add status as new key, also count it from 1
         if dictLocalPort.has_key(localPort):
-            dictLocalPort[localPort]=dictStatus[localPort]+1
+            dictLocalPort[localPort]=dictLocalPort[localPort]+1
             # count  +1 if  dict already had this status
         else:
             dictLocalPort[localPort]=1
