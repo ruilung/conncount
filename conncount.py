@@ -17,7 +17,7 @@ def printTop(dictData,recordToPrint,totalConnection):
             break
             # list top 10 remote address, sorted by connections.
 
-    print "top %d %3.2f%%, other %3.2f%%" % (recordToPrint, rcount / totalConnection * 100, (totalConnection - rcount) / totalConnection * 100)
+    print "top %d %3.2f%%, others %3.2f%%" % (recordToPrint, rcount / totalConnection * 100, (totalConnection - rcount) / totalConnection * 100)
     print ""
 
 #  program start at here
